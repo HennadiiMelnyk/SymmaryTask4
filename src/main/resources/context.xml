@@ -1,0 +1,11 @@
+<context>
+    <Resource name="jdbc/ST4DB"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxActive="400" maxIdle="30" maxWait="1000"
+              driverClassName="com.mysql.jdbc.Driver"
+              username="root" passwprd="1111"
+              defaultAutoCommit="false"
+              defaultTransactionIsolation="READ_COMMITTED"
+              url="jdbc:mysql://127.0.0.1/faculty"/>
+</context>
