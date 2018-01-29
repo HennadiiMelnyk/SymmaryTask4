@@ -42,11 +42,10 @@ public class LoginCommand extends Command {
         }
 
         // User user = UserServiceImpl.findUserByLogin(login);
-        User user = userService.
-        //userService.login(email,password);
+        User user = (User) userService;
+        userService.login(email,password);
         LOG.trace("Found in DB: user --> " + email);
 
-        // if (email == null || !password.equals(user.getPassword()))
         if (email == null || !password.equals(user.getPassword())) {
             throw new CustomException("Cannot find user with such email/password");
         }

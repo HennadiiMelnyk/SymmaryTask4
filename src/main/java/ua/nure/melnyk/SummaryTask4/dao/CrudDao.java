@@ -1,6 +1,5 @@
 package ua.nure.melnyk.SummaryTask4.dao;
 
-//TODO write docs.
 
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
 

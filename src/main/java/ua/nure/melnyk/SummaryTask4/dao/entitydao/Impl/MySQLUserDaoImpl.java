@@ -50,7 +50,7 @@ public class MySQLUserDaoImpl implements UserDao {
             int k = 1;
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
-            preparedStatement.setObject(k++, user.getStatus());
+            //preparedStatement.setBoolean(k++, user.getStatus());
             execute();
             commit();
         } catch (SQLException e) {
@@ -76,7 +76,7 @@ public class MySQLUserDaoImpl implements UserDao {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_BY_ID);
             int k = 1;
-            preparedStatement.setObject(k++, user.getStatus());
+            //preparedStatement.setObject(k++, user.getStatus());
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
             preparedStatement.setInt(k,user.getId());
@@ -106,7 +106,7 @@ public class MySQLUserDaoImpl implements UserDao {
                 user.setName(resultSet.getString(SQL_NAME_COLUMN_INDEX));
                 user.setPassword(resultSet.getString(SQL_PASSWORD_COLUMN_INDEX));
                 user.setEmail(resultSet.getString(SQL_EMAIL_COLUMN_INDEX));
-                user.setStatus((Status) resultSet.getObject("status"));
+               // user.setStatus((Status) resultSet.getObject("status"));
 
             }
         } catch (SQLException e) {

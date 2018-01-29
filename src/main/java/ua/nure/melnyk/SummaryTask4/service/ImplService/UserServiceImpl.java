@@ -3,6 +3,7 @@ package ua.nure.melnyk.SummaryTask4.service.ImplService;
 
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.UserDao;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
+import ua.nure.melnyk.SummaryTask4.exceptions.UserDataException;
 import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
@@ -11,8 +12,6 @@ import java.sql.SQLException;
 /**
  * User Service
  * Business logic
- *
- *
  */
 public class UserServiceImpl implements UserService {
 
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean registerUser(User user) throws DBException, SQLException {
         userDao.create(user);
-        user =new User();
+        user = new User();
         user.getRole();
         user.getPassword();
         return false;
@@ -51,10 +50,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String email, String password) throws DBException, SQLException {
+    public boolean login(String email, String password) throws DBException, SQLException, UserDataException {
         User user = userDao.getUserByEmail(email);
 
-
+        return true;
 
     }
 }
