@@ -2,8 +2,10 @@ package ua.nure.melnyk.SummaryTask4.service;
 
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
 import ua.nure.melnyk.SummaryTask4.model.Course;
+import ua.nure.melnyk.SummaryTask4.model.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Course Service
@@ -19,4 +21,6 @@ public interface CourseService {
     public Course getById(int id);
 
     public boolean delete(int id);
+
+    public List<Course> getAllCoursesByUser(User user);
 }

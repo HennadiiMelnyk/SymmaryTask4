@@ -3,9 +3,13 @@ package ua.nure.melnyk.SummaryTask4.service.ImplService;
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.CourseDao;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
 import ua.nure.melnyk.SummaryTask4.model.Course;
+import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.service.CourseService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *  Service
  * Business logic
@@ -40,5 +44,12 @@ public class CourseServiceImpl implements CourseService
     @Override
     public boolean delete(int id) {
         return false;
+    }
+
+    @Override
+    public List<Course> getAllCoursesByUser(User user) {
+        List<Course> courses = new ArrayList<>();
+
+        return courses;
     }
 }

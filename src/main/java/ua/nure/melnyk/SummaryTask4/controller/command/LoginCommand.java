@@ -5,6 +5,7 @@ import ua.nure.melnyk.SummaryTask4.Const.Path;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
 import ua.nure.melnyk.SummaryTask4.model.Role;
 import ua.nure.melnyk.SummaryTask4.model.User;
+import ua.nure.melnyk.SummaryTask4.security.Password;
 import ua.nure.melnyk.SummaryTask4.service.ImplService.UserServiceImpl;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
@@ -13,7 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+
+import static ua.nure.melnyk.SummaryTask4.model.Role.ADMIN;
+import static ua.nure.melnyk.SummaryTask4.model.Role.STUDENT;
+import static ua.nure.melnyk.SummaryTask4.model.Role.TEACHER;
 
 public class LoginCommand extends Command {
 
@@ -26,7 +32,7 @@ public class LoginCommand extends Command {
     }
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {
         LOG.debug("Command starts");
 
         HttpSession session = request.getSession();
@@ -47,6 +53,7 @@ public class LoginCommand extends Command {
         LOG.trace("Found in DB: user --> " + email);
 
         if (email == null || !password.equals(user.getPassword())) {
+            Password.hash(password);
             throw new CustomException("Cannot find user with such email/password");
         }
 
@@ -56,15 +63,15 @@ public class LoginCommand extends Command {
 
         String forward = Path.PAGE_ERROR_PAGE;
 
-        if (userRole == Role.ADMIN) {
+        if (userRole == ADMIN) {
             forward = Path.COMMAND_LIST_ORDERS;
         }
 
-        if (userRole == Role.STUDENT) {
-            forward = Path.COMMAND_LIST_COURSES;
+        if (userRole == STUDENT) {
+            forward = Path.COMMAND_LIST_SCHEDULE;
         }
-        if (userRole == Role.TEACHER) {
-            forward = Path.COMMAND_LIST_MENU;
+        if (userRole == TEACHER) {
+            forward = Path.COMMAND_LIST_COURSES;
         }
 
 

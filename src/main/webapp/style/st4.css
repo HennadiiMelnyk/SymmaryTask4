@@ -122,7 +122,7 @@ Settings form (settings.jsp)
 }
 
 /***************************************************************
-List menu table (list_courses.jsp)
+List menu table (list_schedule.jsp)
 ***************************************************************/
 #list_menu_table {
     margin-top: 5px;
@@ -152,7 +152,7 @@ List order table (list_order.jsp)
 }
 
 /***************************************************************
-Make order form (list_courses.jsp)
+Make order form (list_schedule.jsp)
 ***************************************************************/
 #make_order {
     margin-top: 5px;
