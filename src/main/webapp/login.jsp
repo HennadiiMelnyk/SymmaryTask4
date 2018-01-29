@@ -1,10 +1,10 @@
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
 <c:set var="title" value="Login" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/head.jspf" %>
 
 <body>
 
@@ -21,7 +21,7 @@ Class page corresponds to the '.page' element in included CSS document.
     ===========================================================================--%>
 
     <%-- HEADER --%>
-    <%@ include file="/WEB-INF/jspf/header.jspf"%>
+    <%@ include file="/src/main/webapp/WEB-INF/jspf/header.jspf"%>
     <%-- HEADER --%>
 
     <%--===========================================================================
@@ -60,7 +60,7 @@ Class page corresponds to the '.page' element in included CSS document.
         </td>
     </tr>
 
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/src/main/webapp/WEB-INF/jspf/footer.jspf"%>
 
 </table>
 </body>

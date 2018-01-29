@@ -61,7 +61,7 @@ public class LoginCommand extends Command {
         }
 
         if (userRole == Role.STUDENT) {
-            forward = Path.COMMAND_LIST_MENU;
+            forward = Path.COMMAND_LIST_COURSES;
         }
         if (userRole == Role.TEACHER) {
             forward = Path.COMMAND_LIST_MENU;

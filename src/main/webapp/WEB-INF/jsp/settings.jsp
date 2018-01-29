@@ -1,15 +1,15 @@
-<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
 <c:set var="title" value="Settings" scope="page" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/src/main/webapp/WEB-INF/jspf/head.jspf" %>
 
 <body>
 	<table id="main-container">
 
-		<%@ include file="/WEB-INF/jspf/header.jspf" %>
+		<%@ include file="/src/main/webapp/WEB-INF/jspf/header.jspf" %>
 
 		<tr>
 			<td class="content">
@@ -43,7 +43,7 @@
 			</td>
 		</tr>
 
-		<%@ include file="/WEB-INF/jspf/footer.jspf" %>
+		<%@ include file="/src/main/webapp/WEB-INF/jspf/footer.jspf" %>
 		
 	</table>
 </body>

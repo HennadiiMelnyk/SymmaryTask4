@@ -21,10 +21,12 @@ public class CommandContainer {
         commands.put("viewSettings", new ViewSettingsCommand());
         commands.put("noCommand", new NoCommand());
 
-        // client commands
-        commands.put("listMenu", new ListMenuCommand());
+        // student commands
+        commands.put("listCourses", new ListMenuCommand());
 
         // admin commands
+        commands.put("listOrders", new ListOrdersCommand());
+        //teacher commands
         commands.put("listOrders", new ListOrdersCommand());
 
         LOG.debug("Command container was successfully initialized");
