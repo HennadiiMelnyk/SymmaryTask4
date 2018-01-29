@@ -263,7 +263,7 @@ public class MySQLUserDaoImpl implements UserDao {
             preparedStatement.setString(k++, user.getPassword());
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
-            preparedStatement.setObject(k++, user.getStatus());
+           // preparedStatement.setObject(k++, user.getStatus());
             execute();
             commit();
         } catch (SQLException e) {
