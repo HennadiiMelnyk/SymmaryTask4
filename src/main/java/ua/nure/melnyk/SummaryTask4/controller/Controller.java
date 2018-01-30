@@ -1,5 +1,7 @@
 package ua.nure.melnyk.SummaryTask4.controller;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,19 +22,31 @@ public class Controller extends HttpServlet{
 
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        try {
+            process(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        process(request, response);
+        try {
+            process(request, response);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Main method of this controller.
      */
     private void process(HttpServletRequest request,
-                         HttpServletResponse response) throws IOException, ServletException {
+                         HttpServletResponse response) throws IOException, ServletException, SQLException, NoSuchAlgorithmException {
 
         LOG.debug("Controller starts");
 

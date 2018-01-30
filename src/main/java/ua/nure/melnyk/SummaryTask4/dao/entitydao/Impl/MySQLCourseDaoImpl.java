@@ -235,13 +235,8 @@ public class MySQLCourseDaoImpl implements CourseDao {
     private void getConnection() throws SQLException, DBException {
         try {
             connection = MySQLDaoFactory.getInstance().getConnection();
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM users");
-            while (rs.next()) {
-                System.out.println(rs.getString("email"));
-            }
         } catch (SQLException e) {
-            //LOGGER.error(Messages.LOG_GET_CONNECTION_EXCEPTION);
+            LOGGER.error(Messages.LOG_GET_CONNECTION_EXCEPTION);
             throw new SQLException(e);
         } catch (NamingException e) {
             e.printStackTrace();

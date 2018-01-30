@@ -1,6 +1,8 @@
 package ua.nure.melnyk.SummaryTask4.controller.command;
 
 import org.apache.log4j.Logger;
+import ua.nure.melnyk.SummaryTask4.ApplicationContext;
+import ua.nure.melnyk.SummaryTask4.service.UserService;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -16,18 +18,18 @@ public class CommandContainer {
 
     static {
         // common commands
-        commands.put("login", new LoginCommand());
+       // commands.put("login", new LoginCommand(ApplicationContext);
         commands.put("logout", new LogoutCommand());
         commands.put("viewSettings", new ViewSettingsCommand());
         commands.put("noCommand", new NoCommand());
 
         // student commands
-        commands.put("listCourses", new ListMenuCommand());
+        commands.put("listSchedule", new ListScheduleCommand());
 
         // admin commands
-        commands.put("listOrders", new ListOrdersCommand());
+        //commands.put("listOrders", new ListAdminCommand());
         //teacher commands
-        commands.put("listOrders", new ListOrdersCommand());
+        //commands.put("listCourses", new ListCoursesCommand());
 
         LOG.debug("Command container was successfully initialized");
         LOG.trace("Number of commands --> " + commands.size());

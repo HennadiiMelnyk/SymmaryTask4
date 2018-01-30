@@ -3,10 +3,8 @@ package ua.nure.melnyk.SummaryTask4.controller.command;
 import org.apache.log4j.Logger;
 import ua.nure.melnyk.SummaryTask4.Const.Path;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
-import ua.nure.melnyk.SummaryTask4.model.Role;
 import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.security.Password;
-import ua.nure.melnyk.SummaryTask4.service.ImplService.UserServiceImpl;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
 import javax.servlet.ServletException;
@@ -17,9 +15,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-import static ua.nure.melnyk.SummaryTask4.model.Role.ADMIN;
-import static ua.nure.melnyk.SummaryTask4.model.Role.STUDENT;
-import static ua.nure.melnyk.SummaryTask4.model.Role.TEACHER;
+import static ua.nure.melnyk.SummaryTask4.model.Role.*;
 
 public class LoginCommand extends Command {
 
@@ -49,7 +45,7 @@ public class LoginCommand extends Command {
 
         // User user = UserServiceImpl.findUserByLogin(login);
         User user = (User) userService;
-        userService.login(email,password);
+        userService.login(email, password);
         LOG.trace("Found in DB: user --> " + email);
 
         if (email == null || !password.equals(user.getPassword())) {
@@ -58,19 +54,19 @@ public class LoginCommand extends Command {
         }
 
 
-        Role userRole = user.getRole();
+        String userRole = user.getRole();
         LOG.trace("userRole --> " + userRole);
 
         String forward = Path.PAGE_ERROR_PAGE;
 
-        if (userRole == ADMIN) {
+        if (userRole == ADMIN.toString()) {
             forward = Path.COMMAND_LIST_ORDERS;
         }
 
-        if (userRole == STUDENT) {
+        if (userRole == STUDENT.toString()) {
             forward = Path.COMMAND_LIST_SCHEDULE;
         }
-        if (userRole == TEACHER) {
+        if (userRole == TEACHER.toString()) {
             forward = Path.COMMAND_LIST_COURSES;
         }
 

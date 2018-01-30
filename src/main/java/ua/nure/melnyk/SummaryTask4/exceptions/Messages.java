@@ -17,6 +17,8 @@ public class Messages {
     public static final String LOG_DELETE_USER_BY_ID_EXCEPTION = "Cannot delete user";
     public static final String LOG_DELETE_COURSE_BY_ID_EXCEPTION = "Cannot delete course";
 
+    public static final String LOG_GET_CONNECTION_EXCEPTION="Cannot get connection";
+
     public static final String LOG_EXECUTION_EXCEPTION = "Cannot Execute";
 
     public static final String LOG_COMMIT_EXCEPTION = "Cannot commit";

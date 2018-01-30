@@ -309,7 +309,7 @@ public class MySQLUserDaoImpl implements UserDao {
         try {
             connection = MySQLDaoFactory.getInstance().getConnection();
         } catch (SQLException e) {
-            //LOGGER.error(Messages.LOG_GET_CONNECTION_EXCEPTION);
+            LOGGER.error(Messages.LOG_GET_CONNECTION_EXCEPTION);
             throw new SQLException(e);
         } catch (NamingException e) {
             e.printStackTrace();

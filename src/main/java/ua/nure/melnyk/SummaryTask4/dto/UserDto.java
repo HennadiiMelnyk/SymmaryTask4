@@ -25,8 +25,8 @@ public class UserDto {
         this.name = user.getName();
         this.email = user.getEmail();
         this.password = user.getPassword();
-        this.role = user.getRole();
-        this.status = user.getStatus();
+        //this.role = user.getRole();
+        //this.status = user.getStatus();
     }
 
     public UserDto(int id, String name, String email, String password, Role role,Status status) {

@@ -4,7 +4,7 @@
 
 <html>
 
-<c:set var="title" value="Menu" scope="page" />
+<c:set var="title" value="Courses" scope="page" />
 <%@ include file="/src/main/webapp/WEB-INF/jspf/head.jspf" %>
 
 <body>

@@ -122,32 +122,47 @@ Settings form (settings.jsp)
 }
 
 /***************************************************************
-List menu table (list_schedule.jsp)
+List schedule table (list_schedule.jsp)
 ***************************************************************/
-#list_menu_table {
+#list_schedule_table {
     margin-top: 5px;
 }
 
-#list_menu_table thead {
+#list_schedule_table thead {
     text-align: center;
 }
 
-#list_menu_table td:last-child {
+#list_schedule_table td:last-child {
     text-align: center;
 }
 
 /***************************************************************
-List order table (list_order.jsp)
+List admin table (list_order.jsp)
 ***************************************************************/
-#list_order_table > thead > tr {
+#list_admin_table > thead > tr {
     text-align: center;
 }
 
-#list_order_table td + td + td {
+#list_admin_table td + td + td {
     text-align: center;
 }
 
-#list_order_table > tbody td + td + td + td {
+#list_admin_table > tbody td + td + td + td {
+    text-align: left;
+}
+
+/***************************************************************
+List courses table (list_order.jsp)
+***************************************************************/
+#list_courses_table > thead > tr {
+    text-align: center;
+}
+
+#list_courses_table td + td + td {
+    text-align: center;
+}
+
+#list_courses_table > tbody td + td + td + td {
     text-align: left;
 }
 

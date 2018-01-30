@@ -9,7 +9,7 @@ id INTEGER PRIMARY KEY  AUTO_INCREMENT,
 email VARCHAR(30) NOT NULL UNIQUE,
 password VARCHAR(30) NOT NULL,
 role VARCHAR(20),
-status BOOLEAN,
+active BOOLEAN,
 firstname VARCHAR(30),
 lastname VARCHAR(30)
 );

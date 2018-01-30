@@ -34,27 +34,24 @@
         </dependency>
 
 
-
+            <dependency>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat8-maven-plugin</artifactId>
+                <version>3.0</version>
+            </dependency>
 
     </dependencies>
-    <build>
+
+
+
+
+  <build>
         <finalName>SummaryTask4</finalName>
         <plugins>
             <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
-                <configuration>
-                    <port>8080</port>
-                    <path>/</path>
-                    <uriEncoding>UTF-8</uriEncoding>
-                    <contextFile>/src/main/resources/context.xml</contextFile>
-                </configuration>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
+                     <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
