@@ -195,7 +195,7 @@ public class MySQLCourseDaoImpl implements CourseDao {
             preparedStatement.setInt(k++, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                course.setProgress(resultSet.getString("progress"));
+                course.setId(id);
                 course.setName(resultSet.getString("name"));
             }
         } catch (SQLException e) {

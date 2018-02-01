@@ -4,6 +4,7 @@ import ua.nure.melnyk.SummaryTask4.dao.CrudDao;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
 import ua.nure.melnyk.SummaryTask4.exceptions.UserDataException;
 import ua.nure.melnyk.SummaryTask4.model.Course;
+import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
 
 import java.sql.SQLException;
@@ -22,7 +23,7 @@ public interface UserDao extends CrudDao<User> {
     //getStartedCoursesByUser(User user)-->courses
     //getPendingCoursesByUser(User user)
     //getFinishedCoursesByUser(User user) -- > courses + marks
-    public List<Course> getAllCoursesByUser(User user) throws DBException, SQLException;
+    public List<Schedule> getAllCoursesByUser(User user) throws DBException, SQLException;
 
     public List<Course> getStartedCoursesByUser(User user) throws DBException, SQLException;
 

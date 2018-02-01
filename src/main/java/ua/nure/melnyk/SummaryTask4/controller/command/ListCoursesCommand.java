@@ -23,39 +23,26 @@ public class ListCoursesCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(ListCoursesCommand.class);
 
-    private CourseService courseService;
-
-    public ListCoursesCommand(CourseService courseService) {
-
-        this.courseService = courseService;
-    }
-
     @Override
     public String execute(HttpServletRequest request,
                           HttpServletResponse response) throws IOException, ServletException, CustomException {
-
         LOG.debug("Command starts");
+        CourseService courseService = (CourseService) request.getServletContext().getAttribute("courseService");
 
-        // get menu items list
 
-        User user= CourseService(courseService.getAllCoursesByUser(User user));
+        /*User user = CourseService(courseService.getAllCoursesByUser(user));
         List<Course> courses = courseService.getAllCoursesByUser(user);
-                // DBManager.getInstance().findMenuItems();
+        // DBManager.getInstance().findMenuItems();
         LOG.trace("Found in DB: menuItemsList --> " + menuItems);
 
-        // sort menu by category
-        Collections.sort(menuItems, new Comparator<Course>() {
-            public int compare(menuitem o1, menuitem o2) {
-                return (int)(o1.getCategoryId() - o2.getCategoryId());
-            }
-        });
 
-        // put menu items list to the request
-        request.setAttribute("menuItems", menuItems);
+
+        //request.setAttribute("menuItems", menuItems);
         LOG.trace("Set the request attribute: menuItems --> " + menuItems);
 
-        LOG.debug("Command finished");
+        LOG.debug("Command finished");*/
 
+        return null;
     }
-
+}
 

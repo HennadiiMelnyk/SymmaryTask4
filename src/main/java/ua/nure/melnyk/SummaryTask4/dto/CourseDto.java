@@ -17,6 +17,9 @@ public class CourseDto {
     private String name;
     private String progress;
 
+    public CourseDto() {
+
+    }
 
     public CourseDto(Course course) {
         this.id = course.getId();

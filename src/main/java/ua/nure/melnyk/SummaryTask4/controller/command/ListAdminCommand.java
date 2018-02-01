@@ -15,14 +15,10 @@ public class ListAdminCommand extends Command {
     private static final long serialVersionUID = 6921301127082779114L;
     private static final Logger LOG = Logger.getLogger(ListAdminCommand.class);
 
-    private UserService userService;
-
-    public ListAdminCommand(UserService userService) {
-        this.userService = userService;
-    }
-
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {
         return null;
+
+
     }
 }

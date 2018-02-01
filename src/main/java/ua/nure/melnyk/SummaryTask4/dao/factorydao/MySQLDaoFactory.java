@@ -34,7 +34,7 @@ public class MySQLDaoFactory extends DaoFactory {
         try {
             Context initContext = new InitialContext();
             Context envContext = (Context) initContext.lookup("java:/comp/env");
-            dataSource = (DataSource) envContext.lookup("/ldbc/ST4DB");
+            dataSource = (DataSource) envContext.lookup("/jdbc/ST4DB");
         } catch (NamingException e) {
             //TODO implement log messages
             //TODO implement custom exceptions(decide best practice to use checked or unchecked)

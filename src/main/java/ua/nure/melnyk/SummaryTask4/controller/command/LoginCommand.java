@@ -15,17 +15,14 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-import static ua.nure.melnyk.SummaryTask4.model.Role.*;
+import static ua.nure.melnyk.SummaryTask4.model.Role.ADMIN;
+import static ua.nure.melnyk.SummaryTask4.model.Role.STUDENT;
+import static ua.nure.melnyk.SummaryTask4.model.Role.TEACHER;
 
 public class LoginCommand extends Command {
 
     private static final Logger LOG = Logger.getLogger(LoginCommand.class);
     private static final long serialVersionUID = -1304301803721254190L;
-    private UserService userService;
-
-    public LoginCommand(UserService userService) {
-        this.userService = userService;
-    }
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {
@@ -43,44 +40,8 @@ public class LoginCommand extends Command {
             throw new CustomException("Email/password cannot be empty");
         }
 
-        // User user = UserServiceImpl.findUserByLogin(login);
-        User user = (User) userService;
-        userService.login(email, password);
-        LOG.trace("Found in DB: user --> " + email);
-
-        if (email == null || !password.equals(user.getPassword())) {
-            Password.hash(password);
-            throw new CustomException("Cannot find user with such email/password");
-        }
-
-
-        String userRole = user.getRole();
-        LOG.trace("userRole --> " + userRole);
-
-        String forward = Path.PAGE_ERROR_PAGE;
-
-        if (userRole == ADMIN.toString()) {
-            forward = Path.COMMAND_LIST_ORDERS;
-        }
-
-        if (userRole == STUDENT.toString()) {
-            forward = Path.COMMAND_LIST_SCHEDULE;
-        }
-        if (userRole == TEACHER.toString()) {
-            forward = Path.COMMAND_LIST_COURSES;
-        }
-
-
-        session.setAttribute("user", user);
-        LOG.trace("Set the session attribute: user --> " + user);
-
-        session.setAttribute("userRole", userRole);
-        LOG.trace("Set the session attribute: userRole --> " + userRole);
-
-        LOG.info("User " + user + " logged as " + userRole.toString().toLowerCase());
-
-        LOG.debug("Command finished");
-        return forward;
+        UserService userService = (UserService) request.getServletContext().getAttribute("userService");
+        return userService.login(email, password, request.getSession());
     }
 }
 

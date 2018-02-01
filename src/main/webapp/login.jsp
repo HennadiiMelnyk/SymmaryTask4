@@ -1,10 +1,10 @@
-<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/page.jspf" %>
-<%@ include file="/src/main/webapp/WEB-INF/jspf/directive/taglib.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
+<%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
 <c:set var="title" value="Login" />
-<%@ include file="/src/main/webapp/WEB-INF/jspf/head.jspf" %>
+<%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
 
@@ -21,7 +21,7 @@ Class page corresponds to the '.page' element in included CSS document.
     ===========================================================================--%>
 
     <%-- HEADER --%>
-    <%@ include file="/src/main/webapp/WEB-INF/jspf/header.jspf"%>
+    <%@ include file="/WEB-INF/jspf/header.jspf"%>
     <%-- HEADER --%>
 
     <%--===========================================================================
@@ -34,7 +34,7 @@ Class page corresponds to the '.page' element in included CSS document.
             <%--===========================================================================
             Defines the web form.
             ===========================================================================--%>
-            <form id="login_form" action="controller" method="post">
+            <form id="login_form" action="/controller" method="post">
 
                 <%--===========================================================================
                 Hidden field. In the query it will act as command=login.
@@ -45,7 +45,7 @@ Class page corresponds to the '.page' element in included CSS document.
 
                 <fieldset >
                     <legend>Login</legend>
-                    <input name="login"/><br/>
+                    <input name="email"/><br/>
                 </fieldset><br/>
                 <fieldset>
                     <legend>Password</legend>
@@ -60,7 +60,7 @@ Class page corresponds to the '.page' element in included CSS document.
         </td>
     </tr>
 
-    <%@ include file="/src/main/webapp/WEB-INF/jspf/footer.jspf"%>
+    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
 
 </table>
 </body>

@@ -11,6 +11,7 @@ import ua.nure.melnyk.SummaryTask4.exceptions.Messages;
 import ua.nure.melnyk.SummaryTask4.exceptions.UserDataException;
 import ua.nure.melnyk.SummaryTask4.model.Course;
 import ua.nure.melnyk.SummaryTask4.model.Role;
+import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.Status;
 import ua.nure.melnyk.SummaryTask4.model.User;
 
@@ -103,11 +104,12 @@ public class MySQLUserDaoImpl implements UserDao {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 user = new User();
-                user.setName(resultSet.getString(SQL_NAME_COLUMN_INDEX));
-                user.setPassword(resultSet.getString(SQL_PASSWORD_COLUMN_INDEX));
-                user.setEmail(resultSet.getString(SQL_EMAIL_COLUMN_INDEX));
-               // user.setStatus((Status) resultSet.getObject("status"));
-
+                user.setId(resultSet.getInt(1));
+                user.setName(resultSet.getString(2));
+                user.setEmail(resultSet.getString(3));
+                user.setPassword(resultSet.getString(4));
+                user.setRole(resultSet.getString(5));
+                user.setActive(resultSet.getBoolean(6));
             }
         } catch (SQLException e) {
             rollback();
@@ -142,16 +144,20 @@ public class MySQLUserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<Course> getAllCoursesByUser(User user) throws DBException, SQLException {
-
-        Statement statement;
-        List<Course> courses = new ArrayList<>();
+    public List<Schedule> getAllCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> scheduleList = new ArrayList<>();
         try{
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_GET_ALL_COURSE_BY_USER);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                courses.add((Course) resultSet.getObject("name"));
+                Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getInt(1));
+                schedule.setIdUser(resultSet.getInt(2));
+                schedule.setIdCourse(resultSet.getInt(3));
+                schedule.setMark(resultSet.getInt(4));
+                schedule.setProgress(resultSet.getString(5));
+                scheduleList.add(schedule);
             }
         } catch (SQLException e) {
             rollback();
@@ -161,7 +167,7 @@ public class MySQLUserDaoImpl implements UserDao {
             close(resultSet);
             close();
         }
-        return courses;
+        return scheduleList;
 
     }
 
@@ -287,11 +293,14 @@ public class MySQLUserDaoImpl implements UserDao {
             preparedStatement.setString(k++, email);
             resultSet = preparedStatement.executeQuery();
             user = new User();
-            user.setId(resultSet.getInt(1));
-            user.setEmail(resultSet.getString(2));
-            user.setPassword(resultSet.getString(3));
-            user.setRole(resultSet.getString(4));
-            user.setActive(resultSet.getBoolean(5));
+            while (resultSet.next()) {
+                user.setId(resultSet.getInt(1));
+                user.setName(resultSet.getString(2));
+                user.setEmail(resultSet.getString(3));
+                user.setPassword(resultSet.getString(4));
+                user.setRole(resultSet.getString(5));
+                user.setActive(resultSet.getBoolean(6));
+            }
         } catch (SQLException e) {
             rollback();
             LOGGER.error(Messages.LOG_GET_USER_BY_EMAIL_EXCEPTION);

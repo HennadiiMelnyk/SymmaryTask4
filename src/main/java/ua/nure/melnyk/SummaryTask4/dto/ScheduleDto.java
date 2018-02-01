@@ -6,14 +6,17 @@ import java.util.Objects;
 
 /**
  * Schedule Data transfer object
- *
- *
- *
  */
 public class ScheduleDto {
     private int id;
+    private String course;
+    private String user;
     private int mark;
+    private String progress;
 
+    public ScheduleDto() {
+
+    }
 
     public ScheduleDto(Schedule schedule) {
         this.id = schedule.getId();
@@ -40,6 +43,30 @@ public class ScheduleDto {
 
     public void setMark(int mark) {
         this.mark = mark;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 
     @Override

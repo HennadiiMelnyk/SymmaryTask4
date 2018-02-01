@@ -5,7 +5,7 @@ public final class SQLQuery {
 
     public static final String SQL_FIND_ALL_USERS = "SELECT * FROM users";
 
-    public static final String SQL_GET_ALL_COURSE_BY_USER = "SELECT * FROM course WHERE email=?";
+    public static final String SQL_GET_ALL_COURSE_BY_USER = "SELECT * FROM schedule WHERE id_user=?";
 
     public static final String SQL_SORTED_BY_ASC="SELECT * FROM course ORDER BY ASC";
     public static final String SQL_SORTED_BY_DESC="SELECT * FROM course ORDER BY DESC";
@@ -23,7 +23,7 @@ public final class SQLQuery {
             +"(SELECT course.id FROM users WHERE id_role=2)";
 
     public static final String SQL_UPDATE_COURSE_BY_ID = "UPDATE course SET name=?, progress=? WHERE id=?";
-    public static final String SQL_GET_USER_BY_EMAIL="SELECT FROM users WHERE email=?";
+    public static final String SQL_GET_USER_BY_EMAIL="SELECT * FROM users WHERE email=?";
 
     public static final String SQL_CREATE_USER = "INSERT INTO users VALUES(DEFAULT, ?)";
 

@@ -18,7 +18,7 @@ public interface CourseService {
 
     public Course updateCourse(int id,Course course);
 
-    public Course getById(int id);
+    public Course getById(int id) throws DBException, SQLException;
 
     public boolean delete(int id);
 

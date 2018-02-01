@@ -14,7 +14,10 @@ import java.util.Objects;
 public class Schedule implements Serializable {
     private static final long serialVersionUID = 2295848915937522983L;
     private int id;
+    private int idUser;
+    private int idCourse;
     private int mark;
+    private String progress;
     public Schedule() {
     }
 
@@ -27,6 +30,30 @@ public class Schedule implements Serializable {
         this.id = scheduleDto.getId();
         this.mark = scheduleDto.getMark();
 
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public int getIdCourse() {
+        return idCourse;
+    }
+
+    public void setIdCourse(int idCourse) {
+        this.idCourse = idCourse;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 
     public int getId() {

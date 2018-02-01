@@ -37,8 +37,8 @@ public class CourseServiceImpl implements CourseService
     }
 
     @Override
-    public Course getById(int id) {
-        return null;
+    public Course getById(int id) throws DBException, SQLException {
+        return courseDao.getById(id);
     }
 
     @Override
