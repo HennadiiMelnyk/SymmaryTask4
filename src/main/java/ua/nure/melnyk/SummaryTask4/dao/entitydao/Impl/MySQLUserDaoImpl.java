@@ -149,6 +149,8 @@ public class MySQLUserDaoImpl implements UserDao {
         try{
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_GET_ALL_COURSE_BY_USER);
+            int k = 1;
+            preparedStatement.setInt(k++, user.getId());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Schedule schedule = new Schedule();

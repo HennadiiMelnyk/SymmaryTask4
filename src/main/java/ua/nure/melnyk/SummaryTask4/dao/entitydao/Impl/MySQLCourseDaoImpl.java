@@ -187,7 +187,7 @@ public class MySQLCourseDaoImpl implements CourseDao {
 
     @Override
     public Course getById(int id) throws DBException, SQLException {
-        Course course = null;
+        Course course = new Course();
         try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ID);
@@ -201,7 +201,7 @@ public class MySQLCourseDaoImpl implements CourseDao {
         } catch (SQLException e) {
             rollback();
             LOGGER.error(Messages.LOG_GET_COURSE_BY_ID_EXCEPTION);
-            new DBException(Messages.LOG_GET_COURSE_BY_ID_EXCEPTION, e);
+            throw new DBException(Messages.LOG_GET_COURSE_BY_ID_EXCEPTION, e);
         } finally {
             close(resultSet);
             close();

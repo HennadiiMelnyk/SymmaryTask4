@@ -17,12 +17,8 @@ public class Course implements Serializable {
     private String name;
     private String progress;
 
-    public String getProgress() {
-        return progress;
-    }
+    public Course() {
 
-    public void setProgress(String progress) {
-        this.progress = progress;
     }
 
     public Course(String string, String resultSetString) {
@@ -55,6 +51,14 @@ public class Course implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getProgress() {
+        return progress;
+    }
+
+    public void setProgress(String progress) {
+        this.progress = progress;
     }
 
     @Override

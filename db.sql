@@ -32,7 +32,9 @@ ON DELETE CASCADE
 ON UPDATE CASCADE
 );
 
-INSERT INTO users VALUES(1, 'vanya', 'email', 'pa', 'STUDENT', true);
+INSERT INTO users VALUES(1, 'vanya', 'email@korki.com', 'pa', 'STUDENT', true);
+INSERT INTO users VALUES(2,'admin','admin@admin.com','admin','ADMIN',true);
+INSERT INTO users VALUES(3,'valeriy','val@teacher.com','teacher','TEACHER',true);
 
 INSERT INTO course VALUES (1, 'math');
 INSERT INTO course VALUES (2, 'physics');
@@ -40,6 +42,7 @@ INSERT INTO course VALUES (3, 'biology');
 
 INSERT INTO schedule VALUES (DEFAULT, 1, 1, 5, 'In progress');
 INSERT INTO schedule VALUES (DEFAULT, 2, 1, 0, 'Pending');
+
 
 SELECT * FROM users;
 SELECT * FROM course;

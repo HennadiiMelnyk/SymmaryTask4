@@ -1,67 +1,43 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
-<c:set var="title" value="Login" />
-<%@ include file="/WEB-INF/jspf/head.jspf" %>
-
+<c:set var="title" value="Login"/>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style/login.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <title>Login</title>
+</head>
 <body>
+<form class="modal-sm" action="controller" method="post">
+    <input type="hidden" name="command" value="login"/>
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Login</h1>
+    </div>
 
-<%--===========================================================================
-Here we use a table layout.
-Class page corresponds to the '.page' element in included CSS document.
-===========================================================================--%>
-<table id="main-container">
+    <div class="form-label-group">
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus name="email">
+        <label for="inputEmail">Email</label>
+    </div>
 
-    <%--===========================================================================
-    This is the HEADER, containing a top menu.
-    header.jspf contains all necessary functionality for it.
-    Just included it in this JSP document.
-    ===========================================================================--%>
-
-    <%-- HEADER --%>
-    <%@ include file="/WEB-INF/jspf/header.jspf"%>
-    <%-- HEADER --%>
-
-    <%--===========================================================================
-    This is the CONTENT, containing the main part of the page.
-    ===========================================================================--%>
-    <tr >
-        <td class="content center">
-            <%-- CONTENT --%>
-
-            <%--===========================================================================
-            Defines the web form.
-            ===========================================================================--%>
-            <form id="login_form" action="/controller" method="post">
-
-                <%--===========================================================================
-                Hidden field. In the query it will act as command=login.
-                The purpose of this to define the command name, which have to be executed
-                after you submit current form.
-                ===========================================================================--%>
-                <input type="hidden" name="command" value="login"/>
-
-                <fieldset >
-                    <legend>Login</legend>
-                    <input name="email"/><br/>
-                </fieldset><br/>
-                <fieldset>
-                    <legend>Password</legend>
-                    <input type="password" name="password"/>
-                </fieldset><br/>
-
-                <input type="submit" value="Login">
-            </form>
-
-            <%-- CONTENT --%>
-
-        </td>
-    </tr>
-
-    <%@ include file="/WEB-INF/jspf/footer.jspf"%>
-
-</table>
+    <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required name="password">
+        <label for="inputPassword">Password</label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="action">Log In</button>
+</form>
 </body>
 </html>
