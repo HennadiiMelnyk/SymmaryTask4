@@ -24,6 +24,7 @@
 <body>
 <form class="modal-sm" action="controller" method="post">
     <input type="hidden" name="command" value="login"/>
+
     <div class="text-center mb-4">
         <h1 class="h3 mb-3 font-weight-normal">Login</h1>
     </div>
@@ -38,6 +39,10 @@
         <label for="inputPassword">Password</label>
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit" name="action">Log In</button>
+</form>
+<form class="modal-sm" action="controller" method="post">
+    <input type="hidden" name="command" value="signUp"/>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="action">Sign Up</button>
 </form>
 </body>
 </html>

@@ -1,26 +1,16 @@
-<%@ page pageEncoding="UTF-8"%>
+<%@ page pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/directive/page.jspf" %>
 <%@ include file="/WEB-INF/jspf/directive/taglib.jspf" %>
 
 <html>
 
-<c:set var="title" value="Schedule" scope="page" />
+<c:set var="title" value="Courses" scope="page"/>
 <%@ include file="/WEB-INF/jspf/head.jspf" %>
 
 <body>
-<table id="main-container">
-
-    <%@ include file="/WEB-INF/jspf/header.jspf" %>
-
-    <tr>
-        <td class="content">
+<%@ include file="/WEB-INF/jspf/header.jspf" %>
             <%-- CONTENT --%>
-
-            <form id="courses" action="controller">
-                <input type="hidden" name="command" value="courses"/>
-                <input value="All courses" type="submit"/>
-
-                <table id="list_courses_table">
+                <table class="highlight">
                     <thead>
                     <tr>
                         <td>№</td>
@@ -28,17 +18,15 @@
 
                     </tr>
                     </thead>
-                    <c:set var="k" value="${k+1}"/>
                     <tr>
 
                         <c:set var="k" value="0"/>
                         <c:forEach var="item" items="${coursesList}">
                         <td>${item.id}</td>
-                        <td>${item.course}</td>
-                        <td>${item.user}</td>
-                        <td>${item.mark}</td>
-                        <td>${item.progress}</td>
-                        <td><input type="checkbox" name="itemId" value="${item.id}"/></td>
+                        <td>${item.userName}</td>
+                        <td>${item.courseName}</td>
+                        <td>${item.courseMark}</td>
+                        <td><input type="number" name="mark" value="${item.mark}"></td>
                     </tr>
                     </c:forEach>
                 </table>

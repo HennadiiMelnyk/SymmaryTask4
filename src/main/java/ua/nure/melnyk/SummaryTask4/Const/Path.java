@@ -11,8 +11,11 @@ public final class Path {
     public static final String PAGE_LOGIN = "/login.jsp";
     public static final String PAGE_ERROR_PAGE = "/WEB-INF/jsp/error_page.jsp";
     public static final String PAGE_LIST_SCHEDULE = "/WEB-INF/jsp/student/list_schedule.jsp";
+    public static final String SIGN_UP_PAGE = "/WEB-INF/jsp/registration/registration.jsp";
     public static final String PAGE_LIST_COURSES = "/WEB-INF/jsp/teacher/list_courses.jsp";
     public static final String PAGE_LIST_ADMIN="/WEB-INF/jsp/admin/list_admin.jsp";
+    public static final String PAGE_LIST_PENDING_COURSES = "/WEB-INF/jsp/student/list_schedule.jsp";
+
 
     public static final String PAGE_SETTINGS = "/WEB-INF/jsp/settings.jsp";
 

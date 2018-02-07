@@ -1,9 +1,9 @@
 package ua.nure.melnyk.SummaryTask4.service;
 
-import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
+import com.google.api.services.gmail.model.Message;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
-import ua.nure.melnyk.SummaryTask4.model.Course;
+import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
 
 import javax.servlet.http.HttpSession;
@@ -27,13 +27,17 @@ public interface UserService {
 
     public String login(String email, String password, HttpSession session) throws CustomException, SQLException;
 
-    public List<ScheduleDto> getAllCoursesByUser(User user) throws DBException, SQLException;
+    public List<Schedule> getAllCoursesByUser(User user) throws DBException, SQLException;
 
-    public List<Course> getStartedCoursesByUser(User user) throws DBException, SQLException;
+    public List<Schedule> getStartedCoursesByUser(User user) throws DBException, SQLException;
 
-    public List<Course> getPendingCoursesByUser(User user) throws DBException, SQLException;
+    public List<Schedule> getPendingCoursesByUser(User user) throws DBException, SQLException;
 
-    public List<Course> getFinishedCoursesByUser(User user) throws DBException, SQLException;
+    public List<Schedule> getFinishedCoursesByUser(User user) throws DBException, SQLException;
+
+    public User createUser(User user) throws DBException, SQLException;
+
+    public Message sendMessage();
 
 
 }

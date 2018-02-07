@@ -1,13 +1,11 @@
 package ua.nure.melnyk.SummaryTask4.service.ImplService;
 
 
+import com.google.api.services.gmail.model.Message;
 import ua.nure.melnyk.SummaryTask4.Const.Path;
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.UserDao;
-import ua.nure.melnyk.SummaryTask4.dto.CourseDto;
-import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
-import ua.nure.melnyk.SummaryTask4.model.Course;
 import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.service.CourseService;
@@ -15,7 +13,6 @@ import ua.nure.melnyk.SummaryTask4.service.UserService;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static ua.nure.melnyk.SummaryTask4.model.Role.ADMIN;
@@ -106,45 +103,82 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<ScheduleDto> getAllCoursesByUser(User user) throws DBException, SQLException {
+    public List<Schedule> getAllCoursesByUser(User user) throws DBException, SQLException {
         List<Schedule> courses = userDao.getAllCoursesByUser(user);
-        List<ScheduleDto> scheduleDtos = new ArrayList<>();
+        return courses;
+    }
+
+    @Override
+    public List<Schedule> getStartedCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> courses = userDao.getStartedCoursesByUser(user);
+        /*List<ScheduleDto> scheduleDtos = new ArrayList<>();
         courses.stream().forEach(schedule -> {
             ScheduleDto scheduleDto = new ScheduleDto();
             scheduleDto.setId(schedule.getId());
             try {
-                scheduleDto.setCourse(courseService.getById(schedule.getIdCourse()).getName());
-            } catch (DBException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
+                scheduleDto.setCourse(courseService.getById(schedule.getCourse()).getName());
+            } catch (DBException | SQLException e) {
                 e.printStackTrace();
             }
             scheduleDto.setUser(user.getName());
             scheduleDto.setMark(schedule.getMark());
             scheduleDto.setProgress(schedule.getProgress());
             scheduleDtos.add(scheduleDto);
-        });
-        return scheduleDtos;
-    }
-
-    @Override
-    public List<Course> getStartedCoursesByUser(User user) throws DBException, SQLException {
-        List<Course> courses = new ArrayList<>();
-
+        });*/
         return courses;
     }
 
     @Override
-    public List<Course> getPendingCoursesByUser(User user) throws DBException, SQLException {
-        List<Course> courses = new ArrayList<>();
-
+    public List<Schedule> getPendingCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> courses = userDao.getPendingCoursesByUser(user);
+        /*List<ScheduleDto> scheduleDtos = new ArrayList<>();
+        courses.stream().forEach(schedule -> {
+            ScheduleDto scheduleDto = new ScheduleDto();
+            scheduleDto.setId(schedule.getId());
+            try {
+                scheduleDto.setCourse(courseService.getById(schedule.getCourse()).getName());
+            } catch (DBException | SQLException e) {
+                e.printStackTrace();
+            }
+            scheduleDto.setUser(user.getName());
+            scheduleDto.setMark(schedule.getMark());
+            scheduleDto.setProgress(schedule.getProgress());
+            scheduleDtos.add(scheduleDto);
+        });*/
         return courses;
     }
 
     @Override
-    public List<Course> getFinishedCoursesByUser(User user) throws DBException, SQLException {
-        List<Course> courses = new ArrayList<>();
-
+    public List<Schedule> getFinishedCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> courses = userDao.getFinishedCoursesByUser(user);
+        /*List<ScheduleDto> scheduleDtos = new ArrayList<>();
+        courses.stream().forEach(schedule -> {
+            ScheduleDto scheduleDto = new ScheduleDto();
+            scheduleDto.setId(schedule.getId());
+            try {
+                scheduleDto.setCourse(courseService.getById(schedule.getCourse()).getName());
+            } catch (DBException | SQLException e) {
+                e.printStackTrace();
+            }
+            scheduleDto.setUser(user.getName());
+            scheduleDto.setMark(schedule.getMark());
+            scheduleDto.setProgress(schedule.getProgress());
+            scheduleDtos.add(scheduleDto);
+        });*/
         return courses;
+    }
+
+    @Override
+    public User createUser(User user) throws DBException, SQLException {
+        userDao.create(user);
+        return user;
+    }
+
+    @Override
+    public Message sendMessage() {
+
+        //SendMailCommand.sendMessage();
+        // return Message;
+        return null;
     }
 }

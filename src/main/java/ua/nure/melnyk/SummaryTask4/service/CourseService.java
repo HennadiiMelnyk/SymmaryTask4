@@ -23,4 +23,5 @@ public interface CourseService {
     public boolean delete(int id);
 
     public List<Course> getAllCoursesByUser(User user);
+    public List<Course> getAllCoursesByTeacher(User user);
 }

@@ -9,8 +9,9 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-public class ListCoursesInProgress extends Command {
-    private static final long serialVersionUID = 6977594662835611916L;
+public class StudentsManagementCommand extends Command
+{
+    private static final long serialVersionUID = 4627401721035646012L;
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {

@@ -1,13 +1,6 @@
 package ua.nure.melnyk.SummaryTask4;
 
-import ua.nure.melnyk.SummaryTask4.controller.command.Command;
-import ua.nure.melnyk.SummaryTask4.controller.command.ListAdminCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.ListCoursesCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.LoginCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.LogoutCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.NoCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.ViewSettingsCommand;
-import ua.nure.melnyk.SummaryTask4.controller.command.ViewStudentListScheduleCommand;
+import ua.nure.melnyk.SummaryTask4.controller.command.*;
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.Impl.MySQLCourseDaoImpl;
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.Impl.MySQLUserDaoImpl;
 import ua.nure.melnyk.SummaryTask4.service.ImplService.CourseServiceImpl;
@@ -50,12 +43,20 @@ public class ApplicationContext implements ServletContextListener {
         commands.put("logout", new LogoutCommand());
         commands.put("viewSettings", new ViewSettingsCommand());
         commands.put("noCommand", new NoCommand());
+        commands.put("signUp",new SignUpCommand());
 
         // student commands
         commands.put("listSchedule", new ViewStudentListScheduleCommand());
+        commands.put("progressingCourses", new ListStartedCourses());
+        commands.put("finishedCourses", new ListFinishedCourses());
+        commands.put("pendingCourses", new ListPendingCourses());
 
         // admin commands
         commands.put("listOrders", new ListAdminCommand());
+
+
+
+
         //teacher commands
         commands.put("listCourses", new ListCoursesCommand());
 

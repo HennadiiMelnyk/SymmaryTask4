@@ -1,32 +1,33 @@
 package ua.nure.melnyk.SummaryTask4.dao.entitydao.Impl;
 
 import org.apache.log4j.Logger;
-
-
 import ua.nure.melnyk.SummaryTask4.dao.entitydao.UserDao;
 import ua.nure.melnyk.SummaryTask4.dao.factorydao.MySQLDaoFactory;
 import ua.nure.melnyk.SummaryTask4.exceptions.DBException;
 import ua.nure.melnyk.SummaryTask4.exceptions.Messages;
-
 import ua.nure.melnyk.SummaryTask4.exceptions.UserDataException;
 import ua.nure.melnyk.SummaryTask4.model.Course;
-import ua.nure.melnyk.SummaryTask4.model.Role;
 import ua.nure.melnyk.SummaryTask4.model.Schedule;
-import ua.nure.melnyk.SummaryTask4.model.Status;
 import ua.nure.melnyk.SummaryTask4.model.User;
-
 
 import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.*;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_CREATE_USER;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_DELETE_USER_BY_ID;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_GET_ALL_COURSE_BY_USER;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_GET_FINISHED_COURSES_BY_USER;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_GET_PENDING_COURSES_BY_USER;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_GET_STARTED_COURSES_BY_USER;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_GET_USER_BY_EMAIL;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_SELECT_USER_BY_ID;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_UPDATE_COURSE;
+import static ua.nure.melnyk.SummaryTask4.Const.SQLQuery.SQL_UPDATE_USER_BY_ID;
 
 public class MySQLUserDaoImpl implements UserDao {
     public MySQLUserDaoImpl() {
@@ -51,6 +52,8 @@ public class MySQLUserDaoImpl implements UserDao {
             int k = 1;
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
+            preparedStatement.setString(k++, user.getName());
+            preparedStatement.setBoolean(k++, user.isActive());
             //preparedStatement.setBoolean(k++, user.getStatus());
             execute();
             commit();
@@ -64,23 +67,23 @@ public class MySQLUserDaoImpl implements UserDao {
         }
         return result;
     }
+
     /**
      * Update user.
      *
-     * @param user,id
-     *            user to update.
+     * @param user,id user to update.
      * @throws SQLException
      */
     @Override
     public User update(int id, User user) throws DBException, SQLException {
-        try{
+        try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_BY_ID);
             int k = 1;
             //preparedStatement.setObject(k++, user.getStatus());
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
-            preparedStatement.setInt(k,user.getId());
+            preparedStatement.setInt(k, user.getId());
             execute();
             commit();
         } catch (SQLException e) {
@@ -143,22 +146,23 @@ public class MySQLUserDaoImpl implements UserDao {
         return result;
     }
 
+    //
     @Override
     public List<Schedule> getAllCoursesByUser(User user) throws DBException, SQLException {
         List<Schedule> scheduleList = new ArrayList<>();
-        try{
+        try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_GET_ALL_COURSE_BY_USER);
-            int k = 1;
+            int k =1;
             preparedStatement.setInt(k++, user.getId());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Schedule schedule = new Schedule();
                 schedule.setId(resultSet.getInt(1));
-                schedule.setIdUser(resultSet.getInt(2));
-                schedule.setIdCourse(resultSet.getInt(3));
-                schedule.setMark(resultSet.getInt(4));
-                schedule.setProgress(resultSet.getString(5));
+                schedule.setIdUser(user.getId());
+                schedule.setCourseName(resultSet.getString(2));
+                schedule.setMark(resultSet.getInt(3));
+                schedule.setProgress(resultSet.getString(4));
                 scheduleList.add(schedule);
             }
         } catch (SQLException e) {
@@ -170,76 +174,100 @@ public class MySQLUserDaoImpl implements UserDao {
             close();
         }
         return scheduleList;
-
     }
 
     @Override
-    public List<Course> getStartedCoursesByUser(User user) throws DBException, SQLException {
-        Statement statement;
-        List<Course> courses = new ArrayList<>();
+    public List<Schedule> getStartedCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> scheduleList = new ArrayList<>();
+
         try {
             getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(SQL_GET_STARTED_COURSES_BY_USER);
+            int k =1;
+            preparedStatement.setInt(k++, user.getId());
+            preparedStatement = connection.prepareStatement(SQL_GET_STARTED_COURSES_BY_USER);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                courses.add((Course) resultSet.getObject(3));
+                Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getInt(1));
+                schedule.setIdUser(user.getId());
+                schedule.setCourseName(resultSet.getString(2));
+                schedule.setMark(resultSet.getInt(3));
+                schedule.setProgress(resultSet.getString(4));
+                scheduleList.add(schedule);
             }
-            statement.close();
-            connection.close();
+
         } catch (SQLException e) {
             rollback();
             LOGGER.error(Messages.LOG_GET_STARTED_COURSES_BY_USER_EXCEPTION);
             throw new DBException(Messages.LOG_GET_STARTED_COURSES_BY_USER_EXCEPTION, e);
+        } finally {
+            close(resultSet);
+            close();
         }
-       return courses;
+        return scheduleList;
     }
+
     @Override
-    public List<Course> getPendingCoursesByUser(User user) throws DBException, SQLException {
-        Statement statement;
-        List<Course> courses = new ArrayList<>();
+    public List<Schedule> getPendingCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> scheduleList = new ArrayList<>();
 
         try {
             getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(SQL_GET_PENDING_COURSES_BY_USER);
+            preparedStatement = connection.prepareStatement(SQL_GET_PENDING_COURSES_BY_USER);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                courses.add((Course) resultSet.getObject("progress"));
+                Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getInt(1));
+                schedule.setIdUser(user.getId());
+                schedule.setCourseName(resultSet.getString(2));
+                schedule.setMark(resultSet.getInt(3));
+                schedule.setProgress(resultSet.getString(4));
+                scheduleList.add(schedule);
             }
-            statement.close();
-            connection.close();
+
         } catch (SQLException e) {
             rollback();
             LOGGER.error(Messages.LOG_GET_PENDING_COURSES_BY_USER_EXCEPTION);
             throw new DBException(Messages.LOG_GET_PENDING_COURSES_BY_USER_EXCEPTION, e);
+        } finally {
+            close(resultSet);
+            close();
         }
-        return courses;
+        return scheduleList;
     }
 
     @Override
-    public List<Course> getFinishedCoursesByUser(User user) throws DBException, SQLException {
-        Statement statement;
-        List<Course> courses = new ArrayList<>();
+    public List<Schedule> getFinishedCoursesByUser(User user) throws DBException, SQLException {
+        List<Schedule> scheduleList = new ArrayList<>();
         try {
             getConnection();
-            statement = connection.createStatement();
-            resultSet = statement.executeQuery(SQL_GET_FINISHED_COURSES_BY_USER);
+            preparedStatement = connection.prepareStatement(SQL_GET_FINISHED_COURSES_BY_USER);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                courses.add((Course) resultSet.getObject(3));
+                Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getInt(1));
+                schedule.setIdUser(user.getId());
+                schedule.setCourseName(resultSet.getString(2));
+                schedule.setMark(resultSet.getInt(3));
+                schedule.setProgress(resultSet.getString(4));
+                scheduleList.add(schedule);
             }
-            statement.close();
-            connection.close();
+
         } catch (SQLException e) {
             rollback();
             LOGGER.error(Messages.LOG_GET_FINISHED_COURSES_BY_USER_EXCEPTION);
             throw new DBException(Messages.LOG_GET_FINISHED_COURSES_BY_USER_EXCEPTION, e);
+        } finally {
+            close(resultSet);
+            close();
         }
-
-        return courses;
+        return scheduleList;
     }
+
 
     @Override
     public void updateCourses(Course... courses) throws DBException, SQLException {
-        try{
+        try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_COURSE);
             for (Course course : courses) {
@@ -264,14 +292,14 @@ public class MySQLUserDaoImpl implements UserDao {
     @Override
     public void updateStudentUser(User user) throws DBException, SQLException {
 
-        try{
+        try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_UPDATE_USER_BY_ID);
             int k = 1;
             preparedStatement.setString(k++, user.getPassword());
             preparedStatement.setString(k++, user.getEmail());
             preparedStatement.setString(k++, user.getPassword());
-           // preparedStatement.setObject(k++, user.getStatus());
+            // preparedStatement.setObject(k++, user.getStatus());
             execute();
             commit();
         } catch (SQLException e) {
@@ -316,6 +344,7 @@ public class MySQLUserDaoImpl implements UserDao {
         throw new UserDataException(
                 "[MySQLUserDaoImpl#getUserByEmail]getting user from database was returned null, check resultset");
     }
+
     private void getConnection() throws SQLException, DBException {
         try {
             connection = MySQLDaoFactory.getInstance().getConnection();
@@ -345,11 +374,9 @@ public class MySQLUserDaoImpl implements UserDao {
         }
     }
 
-    /** rollback
+    /**
+     * rollback
      * Rollbacks a connection.
-     *
-     *
-     *
      */
     private void rollback() throws SQLException, DBException {
         try {
@@ -375,6 +402,7 @@ public class MySQLUserDaoImpl implements UserDao {
             }
         }
     }
+
     /**
      * Closes a result set object.
      */
@@ -386,5 +414,6 @@ public class MySQLUserDaoImpl implements UserDao {
             throw new DBException(Messages.LOG_RS_CLOSE_EXCEPTION, e);
         }
     }
+
 
 }

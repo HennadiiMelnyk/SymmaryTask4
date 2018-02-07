@@ -11,13 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *  Service
+ * Course Service
  * Business logic
- *
- *
  */
-public class CourseServiceImpl implements CourseService
-{
+public class CourseServiceImpl implements CourseService {
 
     private CourseDao courseDao;
 
@@ -50,6 +47,13 @@ public class CourseServiceImpl implements CourseService
     public List<Course> getAllCoursesByUser(User user) {
         List<Course> courses = new ArrayList<>();
 
+        return courses;
+    }
+
+    @Override
+    public List<Course> getAllCoursesByTeacher(User user) {
+        List<Course> courses = new ArrayList<>();
+        //getAllCoursesByTeacher()
         return courses;
     }
 }

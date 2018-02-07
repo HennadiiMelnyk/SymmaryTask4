@@ -18,16 +18,14 @@
         <td>Progress</td>
     </tr>
     </thead>
-    <c:set var="k" value="${k+1}"/>
     <tr>
 
         <c:set var="k" value="0"/>
         <c:forEach var="item" items="${coursesList}">
         <td>${item.id}</td>
-        <td>${item.course}</td>
+        <td>${item.courseName}</td>
         <td>${item.mark}</td>
         <td>${item.progress}</td>
-        <td><input type="checkbox" name="itemId" value="${item.id}"/></td>
     </tr>
     </c:forEach>
 </table>

@@ -1,11 +1,7 @@
 package ua.nure.melnyk.SummaryTask4.controller.command;
 
 import org.apache.log4j.Logger;
-import ua.nure.melnyk.SummaryTask4.Const.Path;
-import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
-import ua.nure.melnyk.SummaryTask4.model.Course;
-import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
@@ -16,11 +12,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.List;
 
-public class ListPendingCourses extends Command {
-    private static final long serialVersionUID = 8766348406248872655L;
-    private static final Logger LOG = Logger.getLogger(ListPendingCourses.class);
+public class SetNewTeacherCommand extends Command {
+    private static final long serialVersionUID = 1751982338098910045L;
+    private static final Logger LOG = Logger.getLogger(SetNewTeacherCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {
@@ -30,13 +25,14 @@ public class ListPendingCourses extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> pendingCourses = userService.getPendingCoursesByUser(user);
-        if (!pendingCourses.isEmpty()) {
-            request.setAttribute("coursesList", pendingCourses);
-            LOG.debug("Command finished");
-            return Path.PAGE_LIST_PENDING_COURSES;
-        }
-        LOG.error("Problem while getting courses.");
-        return Path.PAGE_ERROR_PAGE;
+        // List<User> userList = userService.createUser(user);
+
+        String email = request.getParameter("email");
+        LOG.trace("Request parameter: email --> " + email);
+        String name = request.getParameter("name");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+        String active = request.getParameter("active");
+        return null;
     }
 }

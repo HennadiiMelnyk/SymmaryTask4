@@ -190,7 +190,7 @@ public class MySQLCourseDaoImpl implements CourseDao {
         Course course = new Course();
         try {
             getConnection();
-            preparedStatement = connection.prepareStatement(SQL_SELECT_USER_BY_ID);
+            preparedStatement = connection.prepareStatement(SQL_SELECT_COURSE_BY_ID);
             int k = 1;
             preparedStatement.setInt(k++, id);
             resultSet = preparedStatement.executeQuery();

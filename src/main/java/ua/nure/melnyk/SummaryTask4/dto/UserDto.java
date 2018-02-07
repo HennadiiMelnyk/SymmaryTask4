@@ -18,7 +18,7 @@ public class UserDto {
     private String email;
     private String password;
     private Role role;
-    private Status status;
+
 
     public UserDto(User user) {
         this.id = user.getId();
@@ -35,20 +35,14 @@ public class UserDto {
         this.email = email;
         this.password = password;
         this.role = role;
-        this.status=status;
+
     }
 
     public int getId() {
         return id;
     }
 
-    public Status getStatus() {
-        return status;
-    }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -95,13 +89,12 @@ public class UserDto {
                 Objects.equals(name, userDto.name) &&
                 Objects.equals(email, userDto.email) &&
                 Objects.equals(password, userDto.password) &&
-                role == userDto.role &&
-                status == userDto.status;
+                role == userDto.role;
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, email, password, role, status);
+        return Objects.hash(id, name, email, password, role);
     }
 }
