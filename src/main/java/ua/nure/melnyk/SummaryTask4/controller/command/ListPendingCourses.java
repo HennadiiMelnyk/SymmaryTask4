@@ -30,11 +30,11 @@ public class ListPendingCourses extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> pendingCourses = userService.getPendingCoursesByUser(user);
+        List<ScheduleDto> pendingCourses = userService.getPendingCoursesByUser(user);
         if (!pendingCourses.isEmpty()) {
             request.setAttribute("coursesList", pendingCourses);
             LOG.debug("Command finished");
-            return Path.PAGE_LIST_PENDING_COURSES;
+            return Path.PAGE_LIST_STUDENT_COURSES;
         }
         LOG.error("Problem while getting courses.");
         return Path.PAGE_ERROR_PAGE;

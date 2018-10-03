@@ -54,6 +54,7 @@ public class MySQLUserDaoImpl implements UserDao {
             preparedStatement.setString(k++, user.getPassword());
             preparedStatement.setString(k++, user.getName());
             preparedStatement.setBoolean(k++, user.isActive());
+            preparedStatement.setObject(k++,user.getRole());
             //preparedStatement.setBoolean(k++, user.getStatus());
             execute();
             commit();
@@ -160,7 +161,7 @@ public class MySQLUserDaoImpl implements UserDao {
                 Schedule schedule = new Schedule();
                 schedule.setId(resultSet.getInt(1));
                 schedule.setIdUser(user.getId());
-                schedule.setCourseName(resultSet.getString(2));
+                schedule.setCourseName(resultSet.getInt(2));
                 schedule.setMark(resultSet.getInt(3));
                 schedule.setProgress(resultSet.getString(4));
                 scheduleList.add(schedule);
@@ -179,18 +180,17 @@ public class MySQLUserDaoImpl implements UserDao {
     @Override
     public List<Schedule> getStartedCoursesByUser(User user) throws DBException, SQLException {
         List<Schedule> scheduleList = new ArrayList<>();
-
         try {
             getConnection();
             int k =1;
-            preparedStatement.setInt(k++, user.getId());
+           // preparedStatement.setInt(k++, user.getId());
             preparedStatement = connection.prepareStatement(SQL_GET_STARTED_COURSES_BY_USER);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Schedule schedule = new Schedule();
                 schedule.setId(resultSet.getInt(1));
                 schedule.setIdUser(user.getId());
-                schedule.setCourseName(resultSet.getString(2));
+                schedule.setCourseName(resultSet.getInt(2));
                 schedule.setMark(resultSet.getInt(3));
                 schedule.setProgress(resultSet.getString(4));
                 scheduleList.add(schedule);
@@ -219,7 +219,7 @@ public class MySQLUserDaoImpl implements UserDao {
                 Schedule schedule = new Schedule();
                 schedule.setId(resultSet.getInt(1));
                 schedule.setIdUser(user.getId());
-                schedule.setCourseName(resultSet.getString(2));
+                schedule.setCourseName(resultSet.getInt(2));
                 schedule.setMark(resultSet.getInt(3));
                 schedule.setProgress(resultSet.getString(4));
                 scheduleList.add(schedule);
@@ -247,7 +247,7 @@ public class MySQLUserDaoImpl implements UserDao {
                 Schedule schedule = new Schedule();
                 schedule.setId(resultSet.getInt(1));
                 schedule.setIdUser(user.getId());
-                schedule.setCourseName(resultSet.getString(2));
+                schedule.setCourseName(resultSet.getInt(2));
                 schedule.setMark(resultSet.getInt(3));
                 schedule.setProgress(resultSet.getString(4));
                 scheduleList.add(schedule);

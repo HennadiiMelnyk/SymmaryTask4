@@ -25,37 +25,23 @@ public class SignUpCommand extends Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, CustomException, SQLException, NoSuchAlgorithmException {
         LOG.debug("Command starts");
-/*
+
 
 
         UserService userService = (UserService) request.getServletContext().getAttribute("userService");
-        HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
 
-        // List<User> userList = userService.createUser(user);
-        PrintWriter printWriter= response.getWriter();
-        String email = request.getParameter("email");
-        LOG.trace("Request parameter: email --> " + email);
-        String name = request.getParameter("name");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        String active = request.getParameter("active");
-        try {
-            if (name.equals("") & password.equals("") & role.equals("")& active.equals("")){
-                printWriter.print("Fields cannot be empty");
+        User user = new User();
 
-            }else {
+
+
                 userService.createUser(user);
+
              //   sendMailCommand
-            }
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
 
-*/
 
+        request.getRequestDispatcher(Path.PAGE_LIST_SIGN_UP).forward(request,response);
         //return userService.login(email, password, request.getSession());
-        // return userService.createUser();
-        return Path.SIGN_UP_PAGE;
+         return userService.createUser(user).toString();
+
     }
 }

@@ -118,12 +118,14 @@ public class MySQLCourseDaoImpl implements CourseDao {
         try {
             getConnection();
             preparedStatement = connection.prepareStatement(SQL_GET_COURSES_BY_TEACHER);
+            int k =1;
+            preparedStatement.setInt(k++, course.getId());
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 course.setId(resultSet.getInt("id"));
                 course.setName(resultSet.getString("name"));
-                course.setProgress(resultSet.getString("progress"));
+
 
                 courses.add(course);
             }

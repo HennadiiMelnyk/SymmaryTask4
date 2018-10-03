@@ -15,7 +15,7 @@ public class Schedule implements Serializable {
     private static final long serialVersionUID = 2295848915937522983L;
     private int id;
     private int idUser;
-    private String courseName;
+    private int courseName;
     private int mark;
     private String progress;
     public Schedule() {
@@ -40,11 +40,11 @@ public class Schedule implements Serializable {
         this.idUser = idUser;
     }
 
-    public String getCourseName() {
+    public int getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
+    public void setCourseName(int courseName) {
         this.courseName = courseName;
     }
 

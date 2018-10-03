@@ -4,10 +4,7 @@ import org.apache.log4j.Logger;
 import ua.nure.melnyk.SummaryTask4.Const.Path;
 import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
-import ua.nure.melnyk.SummaryTask4.model.Course;
-import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
-import ua.nure.melnyk.SummaryTask4.service.CourseService;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
 import javax.servlet.ServletException;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class ListCoursesCommand extends Command {
@@ -36,7 +31,7 @@ public class ListCoursesCommand extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> coursesList = userService.getAllCoursesByUser(user);
+        List<ScheduleDto> coursesList = userService.getAllCoursesByUser(user);
         if (!coursesList.isEmpty()) {
             request.setAttribute("All courses", coursesList);
             LOG.debug("Command finished");

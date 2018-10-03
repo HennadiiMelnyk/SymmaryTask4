@@ -29,11 +29,11 @@ public class ListFinishedCourses extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> finishedCourses = userService.getFinishedCoursesByUser(user);
+        List<ScheduleDto> finishedCourses = userService.getFinishedCoursesByUser(user);
         if (!finishedCourses.isEmpty()) {
             request.setAttribute("coursesList", finishedCourses);
             LOG.debug("Command finished");
-            return Path.PAGE_LIST_PENDING_COURSES;
+            return Path.PAGE_LIST_STUDENT_COURSES;
         }
         LOG.error("Problem while getting finished courses.");
         return Path.PAGE_ERROR_PAGE;

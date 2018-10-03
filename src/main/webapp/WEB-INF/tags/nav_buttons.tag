@@ -11,7 +11,7 @@
 </c:if>
 <c:if test="${sessionScope.userRole == 'STUDENT'}">
     <li><a href="controller?command=listSchedule">All courses</a></li >
-    <li><a href="controller?command=progressingCourses">Started courses</a></li>
+    <li><a href="controller?command=startedCourses">Started courses</a></li>
     <li><a href="controller?command=pendingCourses">Pending courses</a></li>
     <li><a href="controller?command=finishedCourses">Finished courses</a></li>
 </c:if>

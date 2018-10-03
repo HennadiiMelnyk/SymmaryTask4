@@ -47,18 +47,15 @@ public class ApplicationContext implements ServletContextListener {
 
         // student commands
         commands.put("listSchedule", new ViewStudentListScheduleCommand());
-        commands.put("progressingCourses", new ListStartedCourses());
+        commands.put("startedCourses", new ListStartedCourses());
         commands.put("finishedCourses", new ListFinishedCourses());
         commands.put("pendingCourses", new ListPendingCourses());
 
         // admin commands
-        commands.put("listOrders", new ListAdminCommand());
-
-
-
+        commands.put("listAdmin", new ListAdminCommand());
 
         //teacher commands
-        commands.put("listCourses", new ListCoursesCommand());
+        commands.put("listCourses", new ListCoursesByTeacherCommand());
 
         //LOG.debug("Command container was successfully initialized");
         //LOG.trace("Number of commands --> " + commands.size());

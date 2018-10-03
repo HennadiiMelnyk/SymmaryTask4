@@ -2,6 +2,7 @@ package ua.nure.melnyk.SummaryTask4.controller.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.melnyk.SummaryTask4.Const.Path;
+import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
 import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
@@ -28,11 +29,11 @@ public class ListStartedCourses extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> startedCourses = userService.getStartedCoursesByUser(user);
+        List<ScheduleDto> startedCourses = userService.getStartedCoursesByUser(user);
         if (!startedCourses.isEmpty()) {
             request.setAttribute("coursesList", startedCourses);
             LOG.debug("Command finished");
-            return Path.PAGE_LIST_PENDING_COURSES;
+            return Path.PAGE_LIST_STUDENT_COURSES;
         }
         LOG.error("Problem while getting progress courses.");
         return Path.PAGE_ERROR_PAGE;

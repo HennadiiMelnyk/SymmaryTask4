@@ -2,8 +2,8 @@ package ua.nure.melnyk.SummaryTask4.controller.command;
 
 import org.apache.log4j.Logger;
 import ua.nure.melnyk.SummaryTask4.Const.Path;
+import ua.nure.melnyk.SummaryTask4.dto.ScheduleDto;
 import ua.nure.melnyk.SummaryTask4.exceptions.CustomException;
-import ua.nure.melnyk.SummaryTask4.model.Schedule;
 import ua.nure.melnyk.SummaryTask4.model.User;
 import ua.nure.melnyk.SummaryTask4.service.UserService;
 
@@ -29,7 +29,7 @@ public class ViewStudentListScheduleCommand extends Command {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
-        List<Schedule> coursesList = userService.getAllCoursesByUser(user);
+        List<ScheduleDto> coursesList = userService.getAllCoursesByUser(user);
         if (!coursesList.isEmpty()) {
             request.setAttribute("coursesList", coursesList);
             LOG.debug("Command finished");

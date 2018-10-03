@@ -1,7 +1,7 @@
 package ua.nure.melnyk.SummaryTask4.model;
 
 /**
- * Role model
+ * Role ua.nure.melnyk.SummaryTask4.model
  *
  *
  *
